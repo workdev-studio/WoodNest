@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>Shop Furniture | WoodNest</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: "#F7F4EF",
+            sand: "#E9DFD2",
+            wood: "#8B684A",
+            ink: "#28251F"
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    body { font-family: "DM Sans", sans-serif; }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; }
+    .brand-mark {
+      display:inline-grid; place-items:center; width:32px; height:32px;
+      border-radius:50%; background:#8B684A; color:white;
+      font-family:"Playfair Display",serif; font-size:20px;
+    }
+    .shop-link { font-size:13px; color:#625d55; }
+    .shop-link:hover { color:#8B684A; }
+    .shop-input, .shop-select {
+      width:100%; min-width:0; border:1px solid #ddd5ca;
+      background:#fffdfa; padding:11px 12px; font-size:13px;
+      border-radius:2px; outline:none;
+    }
+    .shop-input:focus, .shop-select:focus { border-color:#8B684A; }
+    .shop-button {
+      background:#28251F; color:white; padding:11px 16px;
+      font-size:12px; font-weight:600; cursor:pointer;
+    }
+    .shop-button:hover { background:#8B684A; }
+    .shop-product-image {
+      width:100%; aspect-ratio:4/4.7; object-fit:cover;
+      display:block; transition:transform .35s;
+    }
+    .shop-image-wrap { overflow:hidden; position:relative; background:#e9dfd2; }
+    .shop-image-wrap:hover .shop-product-image { transform:scale(1.035); }
+    .shop-add {
+      position:absolute; left:9px; right:9px; bottom:9px;
+      padding:11px 6px; background:#f7f4ef; color:#28251f;
+      font-size:11px; font-weight:700; cursor:pointer;
+    }
+    .shop-add:hover { background:#28251f; color:white; }
+    .shop-tag {
+      position:absolute; left:9px; top:9px; background:#f7f4ef;
+      padding:5px 8px; font-size:9px; letter-spacing:.08em;
+    }
+    .category-chip {
+      border:1px solid #d9d0c4; padding:8px 13px; font-size:12px;
+      white-space:nowrap; background:transparent;
+    }
+    .category-chip.active, .category-chip:hover {
+      background:#28251f; color:white; border-color:#28251f;
+    }
+    .shop-footer a { display:block; margin-top:10px; font-size:12px; color:#777168; }
+    .shop-footer a:hover { color:#8B684A; }
+    .shop-toast {
+      position:fixed; bottom:20px; left:50%; transform:translate(-50%,20px);
+      background:#28251f; color:white; padding:13px 18px; font-size:12px;
+      opacity:0; pointer-events:none; transition:.25s; z-index:100;
+    }
+    .shop-toast.show { opacity:1; transform:translate(-50%,0); }
+  </style>
+</head>
+
+<body class="bg-cream text-ink">
+
+  <!-- Announcement -->
+  <div class="bg-ink text-white text-center text-xs py-2 px-3">
+    Thoughtful design, delivered to your doorstep · Free shipping on orders over ₹25,000
+  </div>
+
+  <!-- Shared-style navbar -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-black/10">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-3">
+      <button id="mobileMenuButton" class="lg:hidden p-2" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+
+      <a href="index.html" class="flex items-center gap-2 shrink-0">
+        <span class="brand-mark">W</span>
+        <span class="text-xl sm:text-2xl font-semibold tracking-tight">woodnest<span class="text-wood">.</span></span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-7">
+        <a class="shop-link" href="index.html">Home</a>
+        <a class="shop-link font-bold" href="shop.html">Shop all</a>
+        <a class="shop-link" href="shop.html?category=Sofas">Sofas</a>
+        <a class="shop-link" href="shop.html?category=Tables">Tables</a>
+        <a class="shop-link" href="index.html#about">Our story</a>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a href="wishlist.html" class="hidden sm:block text-sm" aria-label="Wishlist">♡</a>
+        <a href="cart.html" class="text-sm whitespace-nowrap">
+          Cart (<span id="cart-count">0</span>)
+        </a>
+      </div>
+    </nav>
+
+    <div id="mobileNav" class="hidden lg:hidden border-t border-black/10 px-5 pb-4">
+      <a class="block py-3 text-sm" href="index.html">Home</a>
+      <a class="block py-3 text-sm" href="shop.html">Shop all</a>
+      <a class="block py-3 text-sm" href="shop.html?category=Sofas">Sofas</a>
+      <a class="block py-3 text-sm" href="shop.html?category=Tables">Tables</a>
+      <a class="block py-3 text-sm" href="index.html#about">Our story</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Shop hero -->
+    <section class="bg-sand">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <p class="text-xs tracking-[.2em] text-wood font-bold mb-4">THE WOODNEST COLLECTION</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl leading-tight mb-4">Find your kind of home.</h1>
+        <p class="text-sm sm:text-base text-stone-600 max-w-xl leading-7">
+          Thoughtfully chosen furniture, warm natural textures and timeless pieces for every room.
+        </p>
+        <p class="text-xs text-stone-500 mt-5">
+          Home <span class="mx-2">/</span> Shop
+          <span id="breadcrumbCategory"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Shop content -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9 sm:py-14">
+
+      <div class="flex flex-col gap-5 mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <p class="text-xs tracking-[.16em] text-wood font-bold mb-2">CURATED FOR YOU</p>
+            <h2 id="shopHeading" class="text-3xl sm:text-4xl">Shop all furniture</h2>
+            <p id="resultCount" class="text-xs text-stone-500 mt-3" aria-live="polite">Loading products...</p>
+          </div>
+
+          <div class="w-full sm:w-64">
+            <label for="searchInput" class="block text-xs font-semibold mb-2">Search furniture</label>
+            <input id="searchInput" class="shop-input" type="search" placeholder="Try sofa, chair, table...">
+          </div>
+        </div>
+
+        <!-- Category chips -->
+        <div id="categoryFilters" class="flex gap-2 overflow-x-auto pb-2">
+          <button class="category-chip active" data-category="All">All furniture</button>
+          <button class="category-chip" data-category="Sofas">Sofas</button>
+          <button class="category-chip" data-category="Tables">Tables</button>
+          <button class="category-chip" data-category="Chairs">Chairs</button>
+          <button class="category-chip" data-category="Storage">Storage</button>
+          <button class="category-chip" data-category="Lighting">Lighting</button>
+        </div>
+
+        <!-- Sort and price -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 border-y border-black/10 py-4">
+          <div>
+            <label for="sortSelect" class="block text-xs font-semibold mb-2">Sort by</label>
+            <select id="sortSelect" class="shop-select">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: low to high</option>
+              <option value="price-high">Price: high to low</option>
+              <option value="name">Name: A to Z</option>
+              <option value="discount">Biggest savings</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="minPrice" class="block text-xs font-semibold mb-2">Minimum price (₹)</label>
+            <input id="minPrice" class="shop-input" type="number" min="0" placeholder="0">
+          </div>
+
+          <div>
+            <label for="maxPrice" class="block text-xs font-semibold mb-2">Maximum price (₹)</label>
+            <input id="maxPrice" class="shop-input" type="number" min="0" placeholder="No limit">
+          </div>
+        </div>
+      </div>
+
+      <!-- Products grid -->
+      <div id="productsGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10">
+        <div class="bg-sand animate-pulse aspect-[4/5]"></div>
+        <div class="bg-sand animate-pulse aspect-[4/5]"></div>
+        <div class="bg-sand animate-pulse aspect-[4/5]"></div>
+        <div class="bg-sand animate-pulse aspect-[4/5]"></div>
+      </div>
+
+      <div id="emptyState" class="hidden text-center py-16">
+        <p class="text-4xl mb-4">⌕</p>
+        <h3 class="text-2xl mb-2">No furniture found</h3>
+        <p class="text-sm text-stone-500 mb-5">Try another search or reset your filters.</p>
+        <button id="resetFilters" class="shop-button">Clear all filters</button>
+      </div>
+
+      <div id="loadError" class="hidden text-center py-14">
+        <h3 class="text-xl mb-3">Products could not load</h3>
+        <p class="text-sm text-stone-600 mb-4">
+          Check that products.json is in the root of your GitHub repository.
+        </p>
+        <button id="retryButton" class="shop-button">Try again</button>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="bg-[#EEE7DD]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 sm:grid-cols-3 gap-7">
+        <div>
+          <p class="text-lg mb-2">✳</p>
+          <h3 class="font-bold text-sm mb-2">Thoughtful design</h3>
+          <p class="text-xs text-stone-600 leading-6">Timeless shapes and warm natural textures.</p>
+        </div>
+        <div>
+          <p class="text-lg mb-2">⌂</p>
+          <h3 class="font-bold text-sm mb-2">Delivery with care</h3>
+          <p class="text-xs text-stone-600 leading-6">Furniture delivered to your doorstep.</p>
+        </div>
+        <div>
+          <p class="text-lg mb-2">♡</p>
+          <h3 class="font-bold text-sm mb-2">Here to help</h3>
+          <p class="text-xs text-stone-600 leading-6">Support for your furniture journey.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="shop-footer bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-1">
+          <a href="index.html" class="flex items-center gap-2 mb-4">
+            <span class="brand-mark">W</span>
+            <span class="text-xl font-semibold">woodnest<span class="text-wood">.</span></span>
+          </a>
+          <p class="text-xs text-stone-500 leading-6 max-w-xs">
+            Thoughtful furniture for slow mornings and everyday living.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xs font-bold">Explore</h3>
+          <a href="shop.html">Shop all</a>
+          <a href="shop.html?category=Sofas">Sofas</a>
+          <a href="shop.html?category=Tables">Tables</a>
+          <a href="shop.html?category=Storage">Storage</a>
+        </div>
+        <div>
+          <h3 class="text-xs font-bold">Help</h3>
+          <a href="contact.html">Contact us</a>
+          <a href="shipping.html">Shipping</a>
+          <a href="returns.html">Returns</a>
+          <a href="faq.html">FAQs</a>
+        </div>
+        <div>
+          <h3 class="text-xs font-bold">WoodNest</h3>
+          <a href="index.html#about">Our story</a>
+          <a href="index.html">Home</a>
+          <p class="text-xs text-stone-500 mt-4">Furniture for better living.</p>
+        </div>
+      </div>
+      <div class="border-t border-black/10 mt-9 pt-5 text-xs text-stone-500 flex flex-col sm:flex-row justify-between gap-3">
+        <span>© <span id="currentYear"></span> WoodNest. Demo storefront.</span>
+        <span>All prices in INR (₹).</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="shopToast" class="shop-toast" role="status" aria-live="polite"></div>
+
+  <!-- Shared JavaScript -->
+  <script src="js/app.js"></script>
+
+  <!-- Shop page logic -->
+  <script>
+    (() => {
+      const grid = document.getElementById("productsGrid");
+      const count = document.getElementById("resultCount");
+      const emptyState = document.getElementById("emptyState");
+      const loadError = document.getElementById("loadError");
+      const searchInput = document.getElementById("searchInput");
+      const sortSelect = document.getElementById("sortSelect");
+      const minPrice = document.getElementById("minPrice");
+      const maxPrice = document.getElementById("maxPrice");
+      const categoryFilters = document.getElementById("categoryFilters");
+
+      let products = [];
+      let selectedCategory = "All";
+
+      const money = value => new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(value);
+
+      function notify(message) {
+        const toast = document.getElementById("shopToast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(notify.timer);
+        notify.timer = setTimeout(() => toast.classList.remove("show"), 2400);
+      }
+
+      function updateCartBadge() {
+        try {
+          const cart = JSON.parse(localStorage.getItem("woodnest_cart")) || [];
+          const total = cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+          document.querySelectorAll("#cart-count").forEach(el => el.textContent = total);
+        } catch {
+          document.querySelectorAll("#cart-count").forEach(el => el.textContent = "0");
+        }
+      }
+
+      function addProductToCart(id) {
+        // Uses the shared function from js/app.js when available.
+        if (typeof window.addToCart === "function") {
+          window.addToCart(id);
+          return;
+        }
+
+        try {
+          const cart = JSON.parse(localStorage.getItem("woodnest_cart")) || [];
+          const existing = cart.find(item => Number(item.id) === id);
+          if (existing) existing.quantity = Number(existing.quantity || 0) + 1;
+          else cart.push({ id, quantity: 1 });
+          localStorage.setItem("woodnest_cart", JSON.stringify(cart));
+          updateCartBadge();
+          notify("Added to your cart");
+        } catch {
+          notify("Unable to save cart in this browser");
+        }
+      }
+
+      function renderProduct(product) {
+        const tag = product.tag
+          ? `<span class="shop-tag">${escapeHTML(product.tag)}</span>`
+          : "";
+
+        return `
+          <article class="min-w-0">
+            <div class="shop-image-wrap">
+              <a href="product.html?id=${encodeURIComponent(product.id)}">
+                <img
+                  class="shop-product-image"
+                  src="${escapeHTML(product.image)}"
+                  alt="${escapeHTML(product.name)}"
+                  loading="lazy">
+              </a>
+              ${tag}
+              <button class="shop-add" type="button" data-add="${Number(product.id)}">
+                ＋ Add to cart
+              </button>
+            </div>
+            <a class="block text-xs font-bold mt-3 leading-5 hover:text-wood"
+               href="product.html?id=${encodeURIComponent(product.id)}">
+              ${escapeHTML(product.name)}
+            </a>
+            <p class="text-xs text-stone-500 mt-1">${escapeHTML(product.category)}</p>
+            <div class="flex flex-wrap items-center gap-2 mt-2 text-xs font-bold">
+              <span>${money(Number(product.price) || 0)}</span>
+              ${product.oldPrice ? `<span class="line-through text-stone-400 font-normal">${money(Number(product.oldPrice))}</span>` : ""}
+            </div>
+          </article>`;
+      }
+
+      function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[char]);
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.trim().toLowerCase();
+        const min = minPrice.value === "" ? 0 : Number(minPrice.value);
+        const max = maxPrice.value === "" ? Infinity : Number(maxPrice.value);
+
+        let filtered = products.filter(product => {
+          const matchesCategory = selectedCategory === "All" ||
+            String(product.category).toLowerCase() === selectedCategory.toLowerCase();
+
+          const searchable = `${product.name} ${product.category} ${product.description || ""}`.toLowerCase();
+          const matchesSearch = searchable.includes(query);
+          const price = Number(product.price) || 0;
+          const matchesPrice = price >= min && price <= max;
+
+          return matchesCategory && matchesSearch && matchesPrice;
+        });
+
+        switch (sortSelect.value) {
+          case "price-low":
+            filtered.sort((a, b) => a.price - b.price);
+            break;
+          case "price-high":
+            filtered.sort((a, b) => b.price - a.price);
+            break;
+          case "name":
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case "discount":
+            filtered.sort((a, b) =>
+              ((b.oldPrice || b.price) - b.price) -
+              ((a.oldPrice || a.price) - a.price)
+            );
+            break;
+        }
+
+        grid.innerHTML = filtered.map(renderProduct).join("");
+        count.textContent = `${filtered.length} product${filtered.length === 1 ? "" : "s"} found`;
+        emptyState.classList.toggle("hidden", filtered.length !== 0);
+        grid.classList.toggle("hidden", filtered.length === 0);
+        loadError.classList.add("hidden");
+
+        document.getElementById("shopHeading").textContent =
+          selectedCategory === "All" ? "Shop all furniture" : `Shop ${selectedCategory}`;
+
+        document.getElementById("breadcrumbCategory").textContent =
+          selectedCategory === "All" ? "" : ` / ${selectedCategory}`;
+
+        categoryFilters.querySelectorAll("[data-category]").forEach(button => {
+          button.classList.toggle("active", button.dataset.category === selectedCategory);
+        });
+      }
+
+      async function loadProducts() {
+        grid.classList.remove("hidden");
+        emptyState.classList.add("hidden");
+        loadError.classList.add("hidden");
+
+        try {
+          const response = await fetch("products.json");
+          if (!response.ok) throw new Error(`Products request failed: ${response.status}`);
+
+          const data = await response.json();
+          if (!Array.isArray(data)) throw new Error("products.json must contain an array");
+
+          products = data;
+          const params = new URLSearchParams(window.location.search);
+          const categoryParam = params.get("category");
+          const searchParam = params.get("search");
+
+          const validCategories = ["Sofas", "Tables", "Chairs", "Storage", "Lighting"];
+          selectedCategory = validCategories.find(
+            category => category.toLowerCase() === (categoryParam || "").toLowerCase()
+          ) || "All";
+
+          if (searchParam) searchInput.value = searchParam;
+          applyFilters();
+        } catch (error) {
+          console.error("WoodNest shop error:", error);
+          grid.classList.add("hidden");
+          count.textContent = "Unable to load products";
+          loadError.classList.remove("hidden");
+        }
+      }
+
+      categoryFilters.addEventListener("click", event => {
+        const button = event.target.closest("[data-category]");
+        if (!button) return;
+        selectedCategory = button.dataset.category;
+        const url = new URL(window.location.href);
+        if (selectedCategory === "All") url.searchParams.delete("category");
+        else url.searchParams.set("category", selectedCategory);
+        history.replaceState({}, "", url);
+        applyFilters();
+      });
+
+      searchInput.addEventListener("input", applyFilters);
+      sortSelect.addEventListener("change", applyFilters);
+      minPrice.addEventListener("input", applyFilters);
+      maxPrice.addEventListener("input", applyFilters);
+
+      grid.addEventListener("click", event => {
+        const button = event.target.closest("[data-add]");
+        if (!button) return;
+        addProductToCart(Number(button.dataset.add));
+      });
+
+      document.getElementById("resetFilters").addEventListener("click", () => {
+        selectedCategory = "All";
+        searchInput.value = "";
+        minPrice.value = "";
+        maxPrice.value = "";
+        sortSelect.value = "featured";
+        history.replaceState({}, "", window.location.pathname);
+        applyFilters();
+      });
+
+      document.getElementById("retryButton").addEventListener("click", loadProducts);
+
+      document.getElementById("mobileMenuButton").addEventListener("click", () => {
+        const nav = document.getElementById("mobileNav");
+        const hidden = nav.classList.toggle("hidden");
+        document.getElementById("mobileMenuButton").setAttribute("aria-expanded", String(!hidden));
+      });
+
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+      updateCartBadge();
+      loadProducts();
+    })();
+  </script>
+</body>
+</html>
