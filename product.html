@@ -82,18 +82,106 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
         <!-- Product Image -->
-        <div>
-          <div class="bg-white rounded-3xl overflow-hidden">
-            <img id="productImage"
-                 src=""
-                 alt="Furniture product"
-                 class="w-full aspect-square object-cover">
-          </div>
+      ```html
+<!-- Product Image Gallery -->
+<div class="w-full min-w-0">
 
-          <p class="text-sm text-gray-500 mt-4">
-            Timeless design · Quality craftsmanship · Everyday comfort
-          </p>
-        </div>
+  <div id="zoomFrame"
+       class="relative aspect-square overflow-hidden rounded-3xl bg-white cursor-zoom-in group">
+
+    <img id="productImage"
+         src=""
+         alt="Furniture product"
+         class="w-full h-full object-cover transition-transform duration-150"
+         draggable="false">
+
+    <div class="absolute bottom-4 right-4 bg-white/90 rounded-full px-4 py-2 text-xs shadow pointer-events-none">
+      <span>⌕</span> Hover to zoom · Click to view
+    </div>
+
+    <button id="openGallery"
+            type="button"
+            aria-label="Open image gallery"
+            class="absolute top-4 right-4 bg-white rounded-full w-11 h-11 shadow hover:bg-sand">
+      ⤢
+    </button>
+  </div>
+
+  <!-- Horizontal thumbnail slider -->
+  <div class="flex items-center gap-2 mt-4">
+    <button id="thumbPrev"
+            type="button"
+            aria-label="Previous thumbnails"
+            class="shrink-0 rounded-full bg-white border border-sand w-9 h-9">
+      ‹
+    </button>
+
+    <div id="thumbnailSlider"
+         class="flex-1 min-w-0 flex gap-3 overflow-x-auto scroll-smooth py-1"
+         style="scrollbar-width: thin">
+    </div>
+
+    <button id="thumbNext"
+            type="button"
+            aria-label="Next thumbnails"
+            class="shrink-0 rounded-full bg-white border border-sand w-9 h-9">
+      ›
+    </button>
+  </div>
+
+  <p id="imageCounter" class="text-xs text-gray-500 mt-3">
+    Image 1 of 5
+  </p>
+
+</div>
+
+<!-- Fullscreen Gallery Modal -->
+<div id="galleryModal"
+     class="hidden fixed inset-0 z-[100] bg-black/90 p-4 md:p-8"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Product image gallery">
+
+  <button id="closeGallery"
+          type="button"
+          aria-label="Close gallery"
+          class="absolute top-4 right-5 z-10 text-white text-4xl">
+    ×
+  </button>
+
+  <div class="max-w-5xl mx-auto h-full flex flex-col justify-center gap-5">
+
+    <div class="relative flex items-center justify-center min-h-0 flex-1">
+      <button id="modalPrev"
+              type="button"
+              aria-label="Previous image"
+              class="absolute left-0 z-10 rounded-full bg-white/90 w-11 h-11 text-2xl">
+        ‹
+      </button>
+
+      <img id="modalImage"
+           src=""
+           alt="Enlarged furniture view"
+           class="max-h-full max-w-[85%] object-contain rounded-xl">
+
+      <button id="modalNext"
+              type="button"
+              aria-label="Next image"
+              class="absolute right-0 z-10 rounded-full bg-white/90 w-11 h-11 text-2xl">
+        ›
+      </button>
+    </div>
+
+    <p id="modalCounter" class="text-center text-white text-sm"></p>
+
+    <div id="modalThumbnails"
+         class="flex gap-3 overflow-x-auto justify-start md:justify-center pb-2"
+         style="scrollbar-width: thin">
+    </div>
+
+  </div>
+</div>
+
 
         <!-- Product Information -->
         <div class="flex flex-col justify-center">
