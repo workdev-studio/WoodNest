@@ -500,7 +500,39 @@
           "Unable to load product details. Please try again.";
       }
     }
+document.getElementById("addToWishlist").addEventListener("click", () => {
+  try {
+    const key = "woodnest_wishlist";
+    const wishlist = JSON.parse(localStorage.getItem(key) || "[]");
 
+    const exists = wishlist.some(
+      item => String(item.id) === String(product.id)
+    );
+
+    if (exists) {
+      document.getElementById("actionMessage").textContent =
+        "This product is already in your wishlist.";
+      return;
+    }
+
+    wishlist.push({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      image: product.image,
+      description: product.description
+    });
+
+    localStorage.setItem(key, JSON.stringify(wishlist));
+
+    document.getElementById("actionMessage").textContent =
+      "Added to wishlist successfully!";
+  } catch {
+    document.getElementById("actionMessage").textContent =
+      "Unable to save wishlist. Please check browser storage.";
+  }
+});
     document.getElementById("currentYear").textContent =
       new Date().getFullYear();
 
