@@ -1,0 +1,508 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Product Details | WoodNest</title>
+  <meta name="description" content="Explore premium furniture at WoodNest. Discover elegant wooden furniture for your home.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: "#F7F4EF",
+            sand: "#E9DFD2",
+            wood: "#8B684A",
+            ink: "#29251F"
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-cream text-ink">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-sand">
+    <nav class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+      <a href="index.html" class="text-2xl font-bold tracking-wide">
+        Wood<span class="text-wood">Nest</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-7 text-sm">
+        <a href="index.html" class="hover:text-wood">Home</a>
+        <a href="shop.html" class="hover:text-wood">Shop</a>
+        <a href="shop.html" class="hover:text-wood">Sofas</a>
+        <a href="shop.html" class="hover:text-wood">Tables</a>
+      </div>
+
+      <a href="cart.html"
+         class="rounded-full bg-ink text-white px-5 py-2 text-sm hover:bg-wood transition">
+        Cart (<span id="cartCount">0</span>)
+      </a>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-7xl mx-auto px-5 pt-6 text-sm text-gray-500">
+    <a href="index.html" class="hover:text-wood">Home</a>
+    <span class="mx-2">/</span>
+    <a href="shop.html" class="hover:text-wood">Shop</a>
+    <span class="mx-2">/</span>
+    <span id="breadcrumbName">Product Details</span>
+  </div>
+
+  <!-- Product Details -->
+  <main class="max-w-7xl mx-auto px-5 py-8 md:py-14">
+
+    <div id="loading" class="text-center py-20">
+      Loading product details...
+    </div>
+
+    <div id="productError" class="hidden text-center py-20">
+      <h1 class="text-2xl font-bold mb-3">Product not found</h1>
+      <p class="text-gray-600 mb-6">
+        This product may have been removed or the link is incorrect.
+      </p>
+      <a href="shop.html"
+         class="inline-block bg-ink text-white px-6 py-3 rounded-full">
+        Back to Shop
+      </a>
+    </div>
+
+    <section id="productContent" class="hidden">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+
+        <!-- Product Image -->
+        <div>
+          <div class="bg-white rounded-3xl overflow-hidden">
+            <img id="productImage"
+                 src=""
+                 alt="Furniture product"
+                 class="w-full aspect-square object-cover">
+          </div>
+
+          <p class="text-sm text-gray-500 mt-4">
+            Timeless design · Quality craftsmanship · Everyday comfort
+          </p>
+        </div>
+
+        <!-- Product Information -->
+        <div class="flex flex-col justify-center">
+
+          <p id="productCategory"
+             class="uppercase tracking-[0.2em] text-xs text-wood font-semibold mb-4">
+          </p>
+
+          <div id="productTag"
+               class="hidden text-xs bg-sand text-ink rounded-full px-3 py-1 w-fit mb-4">
+          </div>
+
+          <h1 id="productName"
+              class="text-3xl md:text-5xl font-semibold leading-tight mb-4">
+          </h1>
+
+          <div class="flex items-center gap-2 mb-5 text-sm">
+            <span class="text-amber-600">★★★★★</span>
+            <span class="text-gray-500">Premium furniture collection</span>
+          </div>
+
+          <div class="flex items-center flex-wrap gap-3 mb-5">
+            <span id="productPrice" class="text-3xl font-semibold"></span>
+            <span id="productOldPrice"
+                  class="hidden text-lg text-gray-400 line-through"></span>
+            <span id="productDiscount"
+                  class="hidden text-sm text-green-700 font-semibold"></span>
+          </div>
+
+          <p class="text-sm text-gray-500 mb-6">
+            Inclusive of all taxes
+          </p>
+
+          <div class="border-y border-sand py-6 mb-6">
+            <h2 class="font-semibold mb-2">Product Description</h2>
+            <p id="productDescription"
+               class="text-gray-600 leading-7"></p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 mb-6">
+            <div class="flex gap-3 mb-3">
+              <span class="text-wood">✓</span>
+              <p class="text-sm">Elegant design for modern homes</p>
+            </div>
+            <div class="flex gap-3 mb-3">
+              <span class="text-wood">✓</span>
+              <p class="text-sm">Carefully selected furniture collection</p>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-wood">✓</span>
+              <p class="text-sm">Contact us for delivery and availability</p>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <label for="quantity" class="font-medium text-sm mb-3">
+            Quantity
+          </label>
+
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center border border-sand rounded-full overflow-hidden">
+              <button type="button" id="decreaseQty"
+                      class="px-4 py-3 hover:bg-sand"
+                      aria-label="Decrease quantity">−</button>
+
+              <input id="quantity" type="number" value="1" min="1" max="99"
+                     class="w-12 text-center bg-transparent outline-none">
+
+              <button type="button" id="increaseQty"
+                      class="px-4 py-3 hover:bg-sand"
+                      aria-label="Increase quantity">+</button>
+            </div>
+
+            <span id="stockMessage" class="text-xs text-gray-500">
+              Made for your home
+            </span>
+          </div>
+
+          <!-- Buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button id="addToCart"
+                    type="button"
+                    class="bg-ink text-white rounded-full py-4 px-5 hover:bg-wood transition">
+              Add to Cart
+            </button>
+
+            <button id="buyNow"
+                    type="button"
+                    class="border border-ink rounded-full py-4 px-5 hover:bg-sand transition">
+              Buy Now
+            </button>
+          </div>
+
+          <p id="actionMessage" role="status"
+             class="text-sm text-wood mt-4" aria-live="polite"></p>
+
+          <p class="text-xs text-gray-500 mt-5">
+            Product images and specifications may vary by model.
+          </p>
+
+        </div>
+      </div>
+
+      <!-- Related Products -->
+      <section class="mt-20">
+        <div class="flex items-end justify-between mb-7 gap-4">
+          <div>
+            <p class="uppercase tracking-widest text-xs text-wood mb-2">
+              Complete your space
+            </p>
+            <h2 class="text-2xl md:text-3xl font-semibold">
+              You May Also Like
+            </h2>
+          </div>
+
+          <a href="shop.html"
+             class="text-sm underline underline-offset-4 hover:text-wood">
+            View All
+          </a>
+        </div>
+
+        <div id="relatedProducts"
+             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 bg-ink text-white">
+    <div class="max-w-7xl mx-auto px-5 py-10 flex flex-col md:flex-row
+                justify-between gap-6">
+      <div>
+        <a href="index.html" class="text-2xl font-bold">
+          Wood<span class="text-amber-200">Nest</span>
+        </a>
+        <p class="text-sm text-gray-300 mt-3">
+          Thoughtful furniture for beautiful homes.
+        </p>
+      </div>
+
+      <div class="flex gap-5 text-sm text-gray-300">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="shop.html" class="hover:text-white">Shop</a>
+        <a href="cart.html" class="hover:text-white">Cart</a>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 text-center text-xs text-gray-400 py-5">
+      © <span id="currentYear"></span> WoodNest. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+  <script>
+    const money = amount =>
+      new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(amount);
+
+    const getCart = () => {
+      try {
+        const cart = JSON.parse(localStorage.getItem("woodnest_cart") || "[]");
+        return Array.isArray(cart) ? cart : [];
+      } catch {
+        return [];
+      }
+    };
+
+    function updateCartCount() {
+      const count = getCart().reduce(
+        (sum, item) => sum + Math.max(0, Number(item.quantity) || 0),
+        0
+      );
+
+      document.getElementById("cartCount").textContent = count;
+    }
+
+    function safeImage(image) {
+      if (typeof image !== "string" || !image.trim()) return "";
+      try {
+        const url = new URL(image, window.location.href);
+        if (url.protocol === "https:" || url.protocol === "http:") {
+          return url.href;
+        }
+      } catch {}
+      return "";
+    }
+
+    function showError() {
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("productContent").classList.add("hidden");
+      document.getElementById("productError").classList.remove("hidden");
+    }
+
+    function createRelatedCard(product) {
+      const card = document.createElement("a");
+      card.href = `product.html?id=${encodeURIComponent(product.id)}`;
+      card.className =
+        "group block bg-white rounded-2xl overflow-hidden hover:shadow-lg transition";
+
+      const image = document.createElement("img");
+      image.src = safeImage(product.image);
+      image.alt = product.name || "Furniture";
+      image.loading = "lazy";
+      image.className =
+        "w-full aspect-square object-cover group-hover:scale-[1.02] transition";
+
+      const details = document.createElement("div");
+      details.className = "p-4";
+
+      const name = document.createElement("h3");
+      name.className = "font-medium mb-2";
+      name.textContent = product.name || "Furniture";
+
+      const price = document.createElement("p");
+      price.className = "text-wood font-semibold";
+      price.textContent = money(Number(product.price) || 0);
+
+      details.append(name, price);
+      card.append(image, details);
+      return card;
+    }
+
+    async function initProductPage() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id");
+
+      if (!productId) {
+        showError();
+        return;
+      }
+
+      try {
+        const response = await fetch("products.json");
+
+        if (!response.ok) throw new Error("Could not load products.json");
+
+        const products = await response.json();
+
+        if (!Array.isArray(products)) {
+          throw new Error("Product data must be an array");
+        }
+
+        const product = products.find(
+          item => String(item.id) === productId
+        );
+
+        if (!product) {
+          showError();
+          return;
+        }
+
+        const price = Number(product.price);
+        if (!Number.isFinite(price) || price < 0) {
+          throw new Error("Invalid product price");
+        }
+
+        document.title = `${product.name} | WoodNest`;
+
+        document.getElementById("breadcrumbName").textContent =
+          product.name || "Product";
+
+        document.getElementById("productCategory").textContent =
+          product.category || "Furniture";
+
+        document.getElementById("productName").textContent =
+          product.name || "Furniture";
+
+        document.getElementById("productPrice").textContent = money(price);
+
+        document.getElementById("productDescription").textContent =
+          product.description || "Discover timeless design and everyday comfort with WoodNest.";
+
+        const image = document.getElementById("productImage");
+        image.src = safeImage(product.image);
+        image.alt = product.name || "Furniture product";
+        image.onerror = () => {
+          image.removeAttribute("src");
+          image.alt = "Product image unavailable";
+          image.classList.add("bg-sand");
+        };
+
+        if (product.tag) {
+          const tag = document.getElementById("productTag");
+          tag.textContent = product.tag;
+          tag.classList.remove("hidden");
+        }
+
+        if (Number(product.oldPrice) > price) {
+          document.getElementById("productOldPrice").textContent =
+            money(Number(product.oldPrice));
+
+          document.getElementById("productOldPrice").classList.remove("hidden");
+
+          const discount = Math.round(
+            (1 - price / Number(product.oldPrice)) * 100
+          );
+
+          document.getElementById("productDiscount").textContent =
+            `${discount}% OFF`;
+
+          document.getElementById("productDiscount").classList.remove("hidden");
+        }
+
+        const related = products
+          .filter(item => String(item.id) !== productId)
+          .filter(item => item.category === product.category)
+          .slice(0, 4);
+
+        const suggestions = related.length
+          ? related
+          : products.filter(item => String(item.id) !== productId).slice(0, 4);
+
+        const relatedContainer = document.getElementById("relatedProducts");
+        suggestions.forEach(item => {
+          relatedContainer.appendChild(createRelatedCard(item));
+        });
+
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("productContent").classList.remove("hidden");
+
+        const quantityInput = document.getElementById("quantity");
+
+        document.getElementById("decreaseQty").addEventListener("click", () => {
+          quantityInput.value = Math.max(1, (Number(quantityInput.value) || 1) - 1);
+        });
+
+        document.getElementById("increaseQty").addEventListener("click", () => {
+          quantityInput.value = Math.min(99, (Number(quantityInput.value) || 1) + 1);
+        });
+
+        quantityInput.addEventListener("change", () => {
+          quantityInput.value = Math.min(
+            99,
+            Math.max(1, Math.floor(Number(quantityInput.value) || 1))
+          );
+        });
+
+        function addProductToCart() {
+          const quantity = Math.min(
+            99,
+            Math.max(1, Math.floor(Number(quantityInput.value) || 1))
+          );
+
+          const cart = getCart();
+          const existing = cart.find(
+            item => String(item.id) === String(product.id)
+          );
+
+          if (existing) {
+            existing.quantity = Math.min(
+              99,
+              (Number(existing.quantity) || 0) + quantity
+            );
+          } else {
+            cart.push({
+              id: product.id,
+              name: product.name,
+              price: price,
+              image: product.image || "",
+              quantity: quantity
+            });
+          }
+
+          localStorage.setItem("woodnest_cart", JSON.stringify(cart));
+          updateCartCount();
+
+          document.getElementById("actionMessage").textContent =
+            "Product added to your cart successfully.";
+        }
+
+        document.getElementById("addToCart").addEventListener("click", () => {
+          try {
+            addProductToCart();
+          } catch {
+            document.getElementById("actionMessage").textContent =
+              "Unable to save your cart. Please check your browser settings.";
+          }
+        });
+
+        document.getElementById("buyNow").addEventListener("click", () => {
+          try {
+            addProductToCart();
+            window.location.href = "cart.html";
+          } catch {
+            document.getElementById("actionMessage").textContent =
+              "Unable to continue. Please try again.";
+          }
+        });
+
+      } catch (error) {
+        console.error("Product page error:", error);
+        document.getElementById("loading").textContent =
+          "Unable to load product details. Please try again.";
+      }
+    }
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    updateCartCount();
+    initProductPage();
+  </script>
+
+</body>
+</html>
+```
