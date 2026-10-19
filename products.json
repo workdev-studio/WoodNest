@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Marlow 3-Seater Sofa",
+    "category": "Sofas",
+    "price": 42999,
+    "oldPrice": 49999,
+    "tag": "BESTSELLER",
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85",
+    "description": "A relaxed, deep-seat sofa with soft neutral upholstery."
+  },
+  {
+    "id": 2,
+    "name": "Oakline Coffee Table",
+    "category": "Tables",
+    "price": 8999,
+    "oldPrice": 10999,
+    "tag": "NEW",
+    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=900&q=85",
+    "description": "Solid-oak character and a clean, timeless silhouette."
+  },
+  {
+    "id": 3,
+    "name": "Nora Accent Chair",
+    "category": "Chairs",
+    "price": 14999,
+    "oldPrice": 17999,
+    "tag": "",
+    "image": "https://images.unsplash.com/photo-1598300053653-4f1b6e4b7a1b?auto=format&fit=crop&w=900&q=85",
+    "description": "A sculptural accent chair made for slow mornings."
+  },
+  {
+    "id": 4,
+    "name": "Haven Bedside Table",
+    "category": "Storage",
+    "price": 6999,
+    "oldPrice": 7999,
+    "tag": "",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85",
+    "description": "A compact bedside companion with warm wood tones."
+  },
+  {
+    "id": 5,
+    "name": "Arlo Lounge Chair",
+    "category": "Chairs",
+    "price": 18999,
+    "oldPrice": 21999,
+    "tag": "POPULAR",
+    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=85",
+    "description": "A comfortable reading chair with a modern profile."
+  },
+  {
+    "id": 6,
+    "name": "Sienna Dining Table",
+    "category": "Tables",
+    "price": 25999,
+    "oldPrice": 29999,
+    "tag": "",
+    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=85",
+    "description": "Gather around a beautifully simple dining table."
+  },
+  {
+    "id": 7,
+    "name": "Luna Floor Lamp",
+    "category": "Lighting",
+    "price": 5499,
+    "oldPrice": 6499,
+    "tag": "NEW",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
+    "description": "Warm, ambient light for cosy evenings."
+  },
+  {
+    "id": 8,
+    "name": "Forma Open Shelf",
+    "category": "Storage",
+    "price": 11999,
+    "oldPrice": 13999,
+    "tag": "",
+    "image": "https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=900&q=85",
+    "description": "An open shelf for books, ceramics and everyday finds."
+  }
+]
