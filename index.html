@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f4ef">
+  <meta name="description" content="Shop thoughtfully designed furniture for your home at WoodNest.">
+  <title>WoodNest — Furniture for Better Living</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { cream: "#F7F4EF", sand: "#E9DFD2", wood: "#8B684A", ink: "#28251F", muted: "#777168" },
+        fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-cream text-ink font-sans">
+  <div class="announcement-bar text-center text-xs sm:text-sm py-2 px-4">
+    Thoughtful design, delivered to your doorstep <span class="mx-2">·</span> Free shipping on orders over ₹25,000
+  </div>
+
+  <header class="site-header sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-black/5">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[76px] flex items-center justify-between gap-4" aria-label="Main navigation">
+      <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-black/5" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a href="index.html" class="brand flex items-center gap-2" aria-label="WoodNest home">
+        <span class="brand-mark">W</span><span class="text-xl sm:text-2xl tracking-tight font-semibold">woodnest<span class="text-wood">.</span></span>
+      </a>
+      <div id="desktop-nav" class="hidden lg:flex items-center gap-8 text-sm">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="shop.html">Shop all</a>
+        <a class="nav-link" href="shop.html?category=Sofas">Sofas</a>
+        <a class="nav-link" href="shop.html?category=Tables">Tables</a>
+        <a class="nav-link" href="#about">Our story</a>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-3">
+        <button id="search-toggle" class="icon-button hidden sm:grid" aria-label="Search products">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-button hidden sm:grid" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 2.2Z"/></svg>
+        </a>
+        <a href="cart.html" class="icon-button relative" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.5L20.5 8H6"/><circle cx="9.5" cy="19" r="1"/><circle cx="17.5" cy="19" r="1"/></svg>
+          <span id="cart-count" class="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+    <div id="mobile-nav" class="mobile-nav hidden lg:hidden px-5 pb-5">
+      <a href="index.html">Home</a><a href="shop.html">Shop all</a><a href="shop.html?category=Sofas">Sofas</a><a href="shop.html?category=Tables">Tables</a><a href="#about">Our story</a>
+    </div>
+    <div id="search-panel" class="hidden border-t border-black/5 px-4 py-3">
+      <form id="search-form" class="max-w-2xl mx-auto flex gap-2">
+        <input id="search-input" class="search-input flex-1" type="search" placeholder="Search sofas, tables, chairs..." aria-label="Search furniture">
+        <button class="button button-dark" type="submit">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 sm:pt-8">
+      <div class="hero-grid overflow-hidden rounded-2xl sm:rounded-3xl">
+        <div class="hero-copy flex flex-col justify-center items-start px-6 py-10 sm:px-10 lg:px-16 lg:py-16">
+          <p class="eyebrow mb-5"><span class="eyebrow-line"></span> THE ART OF SLOW LIVING</p>
+          <h1 class="hero-title mb-5">A little more<br><em>room to</em> unwind.</h1>
+          <p class="max-w-md text-sm sm:text-base leading-7 text-stone-600 mb-8">Furniture that feels like home. Discover considered pieces, natural textures and timeless shapes made for everyday living.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="shop.html" class="button button-dark">Shop the collection <span aria-hidden="true">↗</span></a>
+            <a href="#featured" class="button button-light">Explore our favourites</a>
+          </div>
+          <div class="hero-note mt-10 flex items-center gap-3 text-xs sm:text-sm text-stone-600">
+            <div class="avatar-stack"><span>✦</span><span>✦</span><span>✦</span></div>
+            <span>Loved by homes across India</span>
+          </div>
+        </div>
+        <div class="hero-image-wrap">
+          <img class="hero-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1500&q=90" alt="Warm neutral living room with contemporary furniture">
+          <div class="image-caption"><span>THE LIVING EDIT</span><span>01 / 04</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 sm:mb-9">
+        <div><p class="eyebrow mb-3">FIND YOUR FEEL</p><h2 class="section-title">Shop by category</h2></div>
+        <a href="shop.html" class="text-sm font-semibold underline underline-offset-4 decoration-stone-400 hover:text-wood">View all categories ↗</a>
+      </div>
+      <div class="category-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <a class="category-card" href="shop.html?category=Sofas"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=700&q=85" alt="Sofa"><div><span>Sofas & seating</span><span>↗</span></div></a>
+        <a class="category-card" href="shop.html?category=Tables"><img src="https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=700&q=85" alt="Wooden table"><div><span>Tables</span><span>↗</span></div></a>
+        <a class="category-card" href="shop.html?category=Chairs"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=700&q=85" alt="Accent chair"><div><span>Chairs</span><span>↗</span></div></a>
+        <a class="category-card" href="shop.html?category=Storage"><img src="https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=700&q=85" alt="Storage shelf"><div><span>Storage</span><span>↗</span></div></a>
+      </div>
+    </section>
+
+    <section id="featured" class="featured-section py-14 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div><p class="eyebrow mb-3">MADE FOR YOUR EVERYDAY</p><h2 class="section-title">Pieces worth coming home to</h2><p class="text-sm text-stone-600 mt-3">Thoughtful favourites for every corner of your home.</p></div>
+          <a href="shop.html" class="text-sm font-semibold underline underline-offset-4 decoration-stone-400 hover:text-wood">Shop all furniture ↗</a>
+        </div>
+        <div id="featured-products" class="product-grid grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-9">
+          <div class="loading-card"></div><div class="loading-card"></div><div class="loading-card hidden sm:block"></div><div class="loading-card hidden sm:block"></div>
+        </div>
+        <p id="product-error" class="hidden text-sm text-red-700 mt-5">Products could not load. Please run this site with VS Code Live Server.</p>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+      <div class="story-panel rounded-2xl sm:rounded-3xl overflow-hidden grid md:grid-cols-2">
+        <div class="story-image"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85" alt="Sunlit, thoughtfully styled home interior"></div>
+        <div id="about" class="story-copy flex flex-col justify-center items-start p-7 sm:p-10 lg:p-16">
+          <p class="eyebrow mb-4">A HOME, YOUR WAY</p>
+          <h2 class="section-title mb-5">Less noise.<br>More meaning.</h2>
+          <p class="text-sm sm:text-base text-stone-600 leading-7 mb-7">We believe good furniture should do more than fill a room. It should bring comfort to your everyday, make space for memories and feel right for years to come.</p>
+          <a href="shop.html" class="button button-dark">Discover WoodNest ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20">
+      <div class="benefit-grid grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div class="benefit-card"><span class="benefit-icon">✳</span><div><h3>Made to last</h3><p>Considered materials and timeless designs.</p></div></div>
+        <div class="benefit-card"><span class="benefit-icon">⌂</span><div><h3>Delivered with care</h3><p>Reliable delivery right to your doorstep.</p></div></div>
+        <div class="benefit-card"><span class="benefit-icon">♡</span><div><h3>Here to help</h3><p>A friendly team for your furniture journey.</p></div></div>
+      </div>
+    </section>
+
+    <section class="newsletter-section px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center">
+      <p class="eyebrow justify-center mb-3">A NOTE FROM WOODNEST</p>
+      <h2 class="section-title mb-3">Make yourself at home.</h2>
+      <p class="text-sm text-stone-600 mb-6">New arrivals, styling notes and little things worth sharing.</p>
+      <form id="newsletter-form" class="newsletter-form flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
+        <input type="email" id="newsletter-email" required placeholder="Your email address" aria-label="Your email address">
+        <button class="button button-dark" type="submit">Sign me up</button>
+      </form>
+      <p id="newsletter-message" class="text-sm mt-3" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="footer-grid grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-1"><a href="index.html" class="brand inline-flex items-center gap-2 mb-4"><span class="brand-mark">W</span><span class="text-xl font-semibold">woodnest<span class="text-wood">.</span></span></a><p class="text-sm text-stone-500 leading-6 max-w-xs">Thoughtful furniture for slower mornings, long conversations and the everyday in between.</p></div>
+        <div><h3 class="footer-heading">Explore</h3><a href="shop.html">Shop all</a><a href="shop.html?category=Sofas">Sofas & seating</a><a href="shop.html?category=Tables">Tables</a><a href="shop.html?category=Storage">Storage</a></div>
+        <div><h3 class="footer-heading">Help</h3><a href="contact.html">Contact us</a><a href="shipping.html">Shipping & delivery</a><a href="returns.html">Returns</a><a href="faq.html">FAQs</a></div>
+        <div><h3 class="footer-heading">Follow along</h3><a href="#about">Our story</a><a href="#newsletter-form">Newsletter</a><p class="text-sm text-stone-500 mt-3">Instagram · Pinterest</p></div>
+      </div>
+      <div class="footer-bottom mt-10 pt-5 flex flex-col sm:flex-row justify-between gap-3 text-xs text-stone-500"><span>© <span id="current-year"></span> WoodNest. Demo storefront.</span><span>Prices shown in INR (₹) · Made for better living.</span></div>
+    </div>
+  </footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
